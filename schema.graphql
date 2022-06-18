@@ -1,0 +1,39 @@
+type Course {
+  id: ID!
+  "Name of the course"
+  name: String!
+  "Tartu University course code"
+  code: String!
+  "Short description of the course"
+  description: String
+  maxpoints: Float
+  "If the course can be given a grade in range [A,B,C,D,E]"
+  gradable: Boolean
+  startingpoints: Float
+  lostpoints: Float
+  goal: Float
+  startdate: Date
+  enddate: Date
+  gradingsystem: [{
+    marker: String
+    pointrange: Float
+  }]
+}
+
+type Task {
+    id: ID!
+    course: Course
+    name: String!
+    description: String
+    maxpoints: Float
+    points: Float
+    deadline: Date 
+    repeats: String
+    completed: Boolean
+}
+
+type Query {
+    tasks: [Task!]
+    courses: [Course!]
+    courseTasks(courseId: ID!, completed: Boolean): [Task!]
+}
